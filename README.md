@@ -172,6 +172,23 @@ pytest backend/tests/ --cov=backend
          └──────────┴──────────┴──────────┴────────────┘
 ```
 
+## 🚢 Deployment
+
+For detailed deployment instructions, see [Deployment Guide](docs/deployment_guide.md).
+
+### Quick Deploy (Docker)
+```bash
+docker compose up -d --build
+```
+
+## ✅ Validation
+To run the full system health check suite:
+```bash
+python validators/run_all_validators.py
+```
+This runs 8 parallel validators checking specs, code quality, proper security configuration, and more.
+
 ## 📝 License
+
 
 MIT License - see LICENSE file for details.

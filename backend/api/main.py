@@ -14,6 +14,9 @@ app = FastAPI(
 # CORS Configuration
 origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
 
+from fastapi.middleware.gzip import GZipMiddleware
+from backend.api.middleware import RateLimitMiddleware
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -21,6 +24,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(GZipMiddleware, minimum_size=1000)
+app.add_middleware(RateLimitMiddleware)
+
 
 from backend.api.routers import chat, health, analytics, marketing, payments, search, social, calendar
 

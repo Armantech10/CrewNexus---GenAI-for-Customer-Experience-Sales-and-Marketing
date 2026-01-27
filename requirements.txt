@@ -22,3 +22,13 @@ pytest-cov>=4.1.0
 # Optional: Install only if using these services
 # stripe>=7.0.0
 # exa_py>=1.0.0
+
+# Validation
+jsonschema>=4.17.0
+pylint>=2.16.0
+mypy>=1.0.0
+bandit>=1.7.4
+safety>=2.3.5
+black>=23.0.0
+docker>=6.0.0
+aiofiles>=23.1.0

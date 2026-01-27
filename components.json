@@ -1,0 +1,55 @@
+{
+    "project_name": "Unified GenAI Platform",
+    "generated_at": "2026-01-27T12:00:00Z",
+    "framework": "Next.js",
+    "styling": "Tailwind CSS",
+    "components": [
+        {
+            "name": "ChatInterface",
+            "path": "frontend/components/chat/ChatInterface.tsx",
+            "type": "feature",
+            "description": "Main chat UI with history and input",
+            "status": "implemented"
+        },
+        {
+            "name": "MessageItem",
+            "path": "frontend/components/chat/MessageItem.tsx",
+            "type": "ui",
+            "description": "Individual chat message bubble",
+            "status": "implemented"
+        },
+        {
+            "name": "DashboardLayout",
+            "path": "frontend/components/dashboard/DashboardLayout.tsx",
+            "type": "layout",
+            "description": "Main dashboard wrapper with sidebar",
+            "status": "implemented"
+        },
+        {
+            "name": "MetricsCard",
+            "path": "frontend/components/dashboard/MetricsCard.tsx",
+            "type": "ui",
+            "description": "Stat card for analytics",
+            "status": "implemented"
+        },
+        {
+            "name": "Button",
+            "path": "frontend/components/ui/Button.tsx",
+            "type": "base",
+            "description": "Reusable button component",
+            "status": "implemented"
+        }
+    ],
+    "pages": [
+        {
+            "route": "/dashboard",
+            "component": "frontend/app/dashboard/page.tsx",
+            "description": "Main analytics dashboard"
+        },
+        {
+            "route": "/chat",
+            "component": "frontend/app/chat/page.tsx",
+            "description": "Chat application entry"
+        }
+    ]
+}

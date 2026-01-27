@@ -1,0 +1,251 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-01-27T12:49:58.224704",
+  "validation_run_id": "val_5908521d",
+  "overall_status": "FAILED",
+  "scores": {
+    "specs": 33,
+    "other": 100,
+    "test_coverage": 0,
+    "integration": 0,
+    "performance": 0,
+    "security": 25,
+    "accessibility": 0,
+    "deployment": 0,
+    "overall": 19
+  },
+  "validators": [
+    {
+      "name": "spec_validator",
+      "status": "FAILED",
+      "duration_ms": 2,
+      "checks": [
+        {
+          "name": "Check specs.json exists",
+          "status": "PASSED",
+          "message": "specs.json found."
+        },
+        {
+          "name": "Check components.json exists",
+          "status": "FAILED",
+          "message": "components.json not found."
+        },
+        {
+          "name": "Validate specs.json JSON syntax",
+          "status": "FAILED",
+          "message": "Invalid JSON: Expecting ':' delimiter: line 1164 column 31 (char 40305)"
+        }
+      ],
+      "errors": [
+        "components.json not found.",
+        "Invalid JSON: Expecting ':' delimiter: line 1164 column 31 (char 40305)"
+      ]
+    },
+    {
+      "name": "CodeQualityValidator",
+      "status": "SKIPPED",
+      "duration_ms": 300000,
+      "checks": [],
+      "message": "Timed out"
+    },
+    {
+      "name": "test_coverage_validator",
+      "status": "FAILED",
+      "duration_ms": 1207,
+      "checks": [
+        {
+          "name": "Unknown",
+          "status": "FAILED",
+          "message": "'returncode'"
+        },
+        {
+          "name": "Frontend Coverage",
+          "status": "SKIPPED",
+          "message": "Frontend coverage check not implemented for root execution context yet."
+        }
+      ]
+    },
+    {
+      "name": "integration_test_validator",
+      "status": "FAILED",
+      "duration_ms": 12201,
+      "checks": [
+        {
+          "name": "GET /health",
+          "status": "FAILED",
+          "message": "Connection error: "
+        },
+        {
+          "name": "GET /docs",
+          "status": "FAILED",
+          "message": "Connection error: "
+        },
+        {
+          "name": "Integration Suite",
+          "status": "SKIPPED",
+          "message": "No integration tests found"
+        }
+      ],
+      "errors": [
+        "Connection error: ",
+        "Connection error: "
+      ]
+    },
+    {
+      "name": "performance_validator",
+      "status": "PASSED_WITH_WARNINGS",
+      "duration_ms": 6253,
+      "checks": [
+        {
+          "name": "API Latency",
+          "status": "FAILED",
+          "message": "All requests failed"
+        },
+        {
+          "name": "Lighthouse Performance",
+          "status": "SKIPPED",
+          "message": "Lighthouse CLI not found"
+        }
+      ]
+    },
+    {
+      "name": "security_validator",
+      "status": "PASSED_WITH_WARNINGS",
+      "duration_ms": 2230,
+      "checks": [
+        {
+          "name": "Bandit",
+          "status": "FAILED",
+          "message": "Failed to parse Bandit output"
+        },
+        {
+          "name": "Safety",
+          "status": "PASSED_WITH_WARNINGS",
+          "message": "Could not parse safety output or no issues."
+        },
+        {
+          "name": "NPM Audit",
+          "status": "PASSED",
+          "message": "Critical: 0, High: 0"
+        },
+        {
+          "name": "Trufflehog",
+          "status": "SKIPPED",
+          "message": "Trufflehog not found"
+        }
+      ]
+    },
+    {
+      "name": "accessibility_validator",
+      "status": "PASSED",
+      "duration_ms": 158,
+      "checks": [
+        {
+          "name": "A11y http://localhost:3000/chat",
+          "status": "SKIPPED",
+          "message": "axe/pa11y CLI not found"
+        },
+        {
+          "name": "A11y http://localhost:3000/dashboard",
+          "status": "SKIPPED",
+          "message": "axe/pa11y CLI not found"
+        },
+        {
+          "name": "A11y http://localhost:3000/campaigns",
+          "status": "SKIPPED",
+          "message": "axe/pa11y CLI not found"
+        }
+      ]
+    },
+    {
+      "name": "deployment_validator",
+      "status": "FAILED",
+      "duration_ms": 8,
+      "checks": [
+        {
+          "name": "Docker CLI",
+          "status": "FAILED",
+          "message": "Docker not found"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_checks": 18,
+    "passed": 2,
+    "warnings": 1,
+    "failed": 8
+  },
+  "recommendations": [
+    {
+      "priority": "high",
+      "category": "spec_validator",
+      "message": "Check components.json exists: components.json not found."
+    },
+    {
+      "priority": "high",
+      "category": "spec_validator",
+      "message": "Validate specs.json JSON syntax: Invalid JSON: Expecting ':' delimiter: line 1164 column 31 (char 40305)"
+    },
+    {
+      "priority": "high",
+      "category": "test_coverage_validator",
+      "message": "Unknown: 'returncode'"
+    },
+    {
+      "priority": "medium",
+      "category": "test_coverage_validator",
+      "message": "Frontend Coverage: Frontend coverage check not implemented for root execution context yet."
+    },
+    {
+      "priority": "high",
+      "category": "integration_test_validator",
+      "message": "GET /health: Connection error: "
+    },
+    {
+      "priority": "high",
+      "category": "integration_test_validator",
+      "message": "GET /docs: Connection error: "
+    },
+    {
+      "priority": "medium",
+      "category": "integration_test_validator",
+      "message": "Integration Suite: No integration tests found"
+    },
+    {
+      "priority": "high",
+      "category": "performance_validator",
+      "message": "API Latency: All requests failed"
+    },
+    {
+      "priority": "medium",
+      "category": "performance_validator",
+      "message": "Lighthouse Performance: Lighthouse CLI not found"
+    },
+    {
+      "priority": "high",
+      "category": "security_validator",
+      "message": "Bandit: Failed to parse Bandit output"
+    },
+    {
+      "priority": "medium",
+      "category": "security_validator",
+      "message": "Safety: Could not parse safety output or no issues."
+    },
+    {
+      "priority": "medium",
+      "category": "security_validator",
+      "message": "Trufflehog: Trufflehog not found"
+    },
+    {
+      "priority": "high",
+      "category": "deployment_validator",
+      "message": "Docker CLI: Docker not found"
+    }
+  ],
+  "next_checkpoint": {
+    "id": "checkpoint_3",
+    "name": "Pre-Deploy Review",
+    "status": "BLOCKED"
+  }
+}

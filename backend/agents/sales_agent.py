@@ -5,7 +5,7 @@ import random
 
 class SalesAgent(BaseAgent):
     def __init__(self):
-        super().__init__(name="SalesGPT")
+        super().__init__(name="SalesAgent")
         # Stages: Introduction -> Qualification -> Value Prop -> Closing
         self.products = [
             {"name": "GenAI Enterprise Suite", "price": "$999/mo", "features": ["All agents", "Unlimited queries"]},

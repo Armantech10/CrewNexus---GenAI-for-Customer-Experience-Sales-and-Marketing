@@ -21,6 +21,11 @@ class Settings(BaseSettings):
     # Integrations
     STRIPE_SECRET_KEY: Optional[str] = None
     EXA_API_KEY: Optional[str] = None
+
+    # Performance & Security
+    CACHE_ENABLED: bool = True
+    CACHE_TTL: int = 3600  # 1 hour default
+    RATE_LIMIT_PER_MINUTE: int = 60
     
     class Config:
         env_file = ".env"

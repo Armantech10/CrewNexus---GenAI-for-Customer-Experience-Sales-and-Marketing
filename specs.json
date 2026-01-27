@@ -15,357 +15,7 @@
       "Multi-platform social media management"
     ]
   },
-  "repositories_analyzed": [
-    {
-      "name": "SalesGPT",
-      "url": "https://github.com/filip-michalsky/SalesGPT",
-      "stars": 2500,
-      "primary_language": "Python",
-      "framework": "LangChain",
-      "core_purpose": "Context-aware AI Sales Agent with conversation stage detection",
-      "key_technologies": ["FastAPI", "LangChain", "OpenAI", "Stripe", "Docker"],
-      "components_extracted": [
-        {
-          "source_path": "salesgpt/agents.py",
-          "target_path": "backend/agents/sales_agent.py",
-          "action": "REUSE",
-          "complexity": "medium",
-          "description": "Core sales agent with conversation stage management",
-          "dependencies": ["langchain", "openai", "pydantic"],
-          "estimated_loc": 450,
-          "reusability_score": 90
-        },
-        {
-          "source_path": "salesgpt/chains.py",
-          "target_path": "backend/agents/sales_chains.py",
-          "action": "REFACTOR",
-          "complexity": "medium",
-          "description": "LangChain chains for sales conversation flow",
-          "dependencies": ["langchain"],
-          "estimated_loc": 320,
-          "reusability_score": 75
-        },
-        {
-          "source_path": "salesgpt/stages.py",
-          "target_path": "backend/config/conversation_stages.py",
-          "action": "REUSE",
-          "complexity": "low",
-          "description": "Sales conversation stage definitions",
-          "dependencies": [],
-          "estimated_loc": 180,
-          "reusability_score": 95
-        },
-        {
-          "source_path": "salesgpt/tools/",
-          "target_path": "backend/tools/knowledge_base.py",
-          "action": "REFACTOR",
-          "complexity": "medium",
-          "description": "Product knowledge base and tool integrations",
-          "dependencies": ["langchain"],
-          "estimated_loc": 280,
-          "reusability_score": 80
-        },
-        {
-          "source_path": "run_api.py",
-          "target_path": "backend/api/main.py",
-          "action": "REFACTOR",
-          "complexity": "high",
-          "description": "FastAPI application entry point",
-          "dependencies": ["fastapi", "uvicorn", "python-dotenv"],
-          "estimated_loc": 380,
-          "reusability_score": 70
-        },
-        {
-          "source_path": "salesgpt/logger.py",
-          "target_path": "shared/utils/logger.py",
-          "action": "REUSE",
-          "complexity": "low",
-          "description": "Centralized logging utility",
-          "dependencies": ["python-logging"],
-          "estimated_loc": 95,
-          "reusability_score": 100
-        }
-      ],
-      "integration_points": {
-        "payment": "Stripe",
-        "llm": "OpenAI GPT-4o",
-        "conversation_memory": "In-memory lists",
-        "streaming": true
-      },
-      "deployment_method": "Docker + FastAPI"
-    },
-    {
-      "name": "Smart-Marketing-Assistant-Crew-AI",
-      "url": "https://github.com/praj2408/Smart-Marketing-Assistant-Crew-AI",
-      "stars": 22,
-      "primary_language": "Python",
-      "framework": "CrewAI",
-      "core_purpose": "Instagram marketing automation using multi-agent system",
-      "key_technologies": ["CrewAI", "OpenAI", "Streamlit", "Instagram API"],
-      "components_extracted": [
-        {
-          "source_path": "src/smart_marketing_assistant/crew.py",
-          "target_path": "backend/agents/marketing_crew.py",
-          "action": "REUSE",
-          "complexity": "high",
-          "description": "CrewAI orchestration for marketing tasks",
-          "dependencies": ["crewai", "langchain"],
-          "estimated_loc": 420,
-          "reusability_score": 85
-        },
-        {
-          "source_path": "src/smart_marketing_assistant/config/agents.yaml",
-          "target_path": "backend/config/agent_configs/marketing.yaml",
-          "action": "REUSE",
-          "complexity": "low",
-          "description": "Agent role and goal definitions",
-          "dependencies": [],
-          "estimated_loc": 120,
-          "reusability_score": 90
-        },
-        {
-          "source_path": "src/smart_marketing_assistant/config/tasks.yaml",
-          "target_path": "backend/config/task_configs/marketing.yaml",
-          "action": "REUSE",
-          "complexity": "low",
-          "description": "Marketing task definitions",
-          "dependencies": [],
-          "estimated_loc": 95,
-          "reusability_score": 90
-        },
-        {
-          "source_path": "src/smart_marketing_assistant/main.py",
-          "target_path": "backend/api/routers/marketing.py",
-          "action": "REFACTOR",
-          "complexity": "medium",
-          "description": "Marketing API endpoints",
-          "dependencies": ["fastapi", "crewai"],
-          "estimated_loc": 250,
-          "reusability_score": 70
-        }
-      ],
-      "integration_points": {
-        "social_media": "Instagram API",
-        "llm": "OpenAI GPT-4",
-        "content_scheduling": "Custom implementation",
-        "analytics": "Instagram Insights"
-      },
-      "deployment_method": "Streamlit app"
-    },
-    {
-      "name": "GenAI_Agents",
-      "url": "https://github.com/NirDiamant/GenAI_Agents",
-      "stars": 6500,
-      "primary_language": "Python (Jupyter Notebooks)",
-      "framework": "Multiple (LangChain, LangGraph, CrewAI)",
-      "core_purpose": "Educational repository with 70+ agent implementation tutorials",
-      "key_technologies": ["LangChain", "LangGraph", "OpenAI", "Anthropic", "RAG"],
-      "components_extracted": [
-        {
-          "source_path": "all_agents_tutorials/",
-          "target_path": "docs/reference/agent_patterns/",
-          "action": "REFERENCE_ONLY",
-          "complexity": "varied",
-          "description": "70+ agent implementation patterns and tutorials",
-          "dependencies": ["varies by tutorial"],
-          "estimated_loc": 15000,
-          "reusability_score": 30,
-          "note": "Use as architectural reference, not direct code extraction"
-        },
-        {
-          "source_path": "Pattern: Memory management",
-          "target_path": "backend/services/memory_service.py",
-          "action": "REWRITE",
-          "complexity": "high",
-          "description": "Production-ready memory service based on tutorial patterns",
-          "dependencies": ["redis", "pydantic"],
-          "estimated_loc": 350,
-          "reusability_score": 0,
-          "inspired_by": "Conversational agent and RAG agent tutorials"
-        },
-        {
-          "source_path": "Pattern: RAG implementations",
-          "target_path": "backend/services/rag_service.py",
-          "action": "REWRITE",
-          "complexity": "high",
-          "description": "Production RAG service based on advanced patterns",
-          "dependencies": ["langchain", "qdrant-client", "sentence-transformers"],
-          "estimated_loc": 480,
-          "reusability_score": 0,
-          "inspired_by": "RAG agent tutorials and multi-step reasoning patterns"
-        },
-        {
-          "source_path": "Pattern: Base agent architecture",
-          "target_path": "backend/agents/base_agent.py",
-          "action": "REWRITE",
-          "complexity": "medium",
-          "description": "Abstract base agent class following best practices",
-          "dependencies": ["abc", "pydantic"],
-          "estimated_loc": 220,
-          "reusability_score": 0,
-          "inspired_by": "Simple conversational agent and task-oriented agent patterns"
-        }
-      ],
-      "integration_points": {
-        "llm": "OpenAI, Anthropic (flexible)",
-        "memory": "Various patterns shown",
-        "tools": "Multiple integration examples",
-        "frameworks": "LangChain, LangGraph, CrewAI"
-      },
-      "deployment_method": "Jupyter Notebooks (educational)",
-      "note": "This repository is primarily for learning patterns, not production code extraction"
-    },
-    {
-      "name": "GenAIExamples (OPEA)",
-      "url": "https://github.com/opea-project/GenAIExamples",
-      "stars": 716,
-      "primary_language": "Shell/Python",
-      "framework": "OPEA Microservices",
-      "core_purpose": "Enterprise-grade microservice architecture for GenAI applications",
-      "key_technologies": ["Docker", "Kubernetes", "FastAPI", "Qdrant", "Redis", "TGI"],
-      "components_extracted": [
-        {
-          "source_path": "ChatQnA/langchain/retrieval_tool.py",
-          "target_path": "backend/services/retrieval_service.py",
-          "action": "REUSE",
-          "complexity": "high",
-          "description": "RAG retrieval with vector database",
-          "dependencies": ["langchain", "qdrant-client"],
-          "estimated_loc": 380,
-          "reusability_score": 85
-        },
-        {
-          "source_path": "ChatQnA/embedding_service.py",
-          "target_path": "backend/services/embedding_service.py",
-          "action": "REFACTOR",
-          "complexity": "medium",
-          "description": "Text embedding service (remove hardware-specific code)",
-          "dependencies": ["sentence-transformers", "openai"],
-          "estimated_loc": 280,
-          "reusability_score": 75
-        },
-        {
-          "source_path": "ChatQnA/llm_service.py",
-          "target_path": "backend/services/llm_service.py",
-          "action": "REFACTOR",
-          "complexity": "medium",
-          "description": "LLM inference service with multi-provider support",
-          "dependencies": ["openai", "anthropic", "requests"],
-          "estimated_loc": 320,
-          "reusability_score": 70
-        },
-        {
-          "source_path": "ChatQnA/reranking_service.py",
-          "target_path": "backend/services/reranking_service.py",
-          "action": "REUSE",
-          "complexity": "medium",
-          "description": "Search result reranking service",
-          "dependencies": ["sentence-transformers"],
-          "estimated_loc": 180,
-          "reusability_score": 90
-        },
-        {
-          "source_path": "comps/vectorstores/qdrant/",
-          "target_path": "backend/database/vector_store.py",
-          "action": "REFACTOR",
-          "complexity": "medium",
-          "description": "Abstract vector database with Qdrant/Redis support",
-          "dependencies": ["qdrant-client", "redis"],
-          "estimated_loc": 420,
-          "reusability_score": 80
-        },
-        {
-          "source_path": "ChatQnA/docker_compose/compose.yaml",
-          "target_path": "infrastructure/docker/docker-compose.yml",
-          "action": "REFACTOR",
-          "complexity": "high",
-          "description": "Simplified Docker Compose for MVP (strip hardware specifics)",
-          "dependencies": [],
-          "estimated_loc": 250,
-          "reusability_score": 60
-        }
-      ],
-      "integration_points": {
-        "vector_db": "Qdrant, Redis, Pinecone",
-        "llm": "OpenAI, TGI, vLLM",
-        "embedding": "BAAI/bge, OpenAI embeddings",
-        "orchestration": "Docker Compose, Kubernetes",
-        "monitoring": "OpenTelemetry"
-      },
-      "deployment_method": "Microservices (Docker/K8s)"
-    },
-    {
-      "name": "awesome-ai-apps",
-      "url": "https://github.com/Arindam200/awesome-ai-apps",
-      "stars": 7600,
-      "primary_language": "Python",
-      "framework": "Multiple (Agno, Mastra, LangChain, AWS Strands)",
-      "core_purpose": "70+ practical AI application recipes and starter templates",
-      "key_technologies": ["Various frameworks", "Memori SDK", "MCP", "Streamlit"],
-      "components_extracted": [
-        {
-          "source_path": "simple_ai_agents/newsletter_agent/",
-          "target_path": "backend/tools/web_search.py",
-          "action": "REFACTOR",
-          "complexity": "medium",
-          "description": "Web search integration (Firecrawl/Exa patterns)",
-          "dependencies": ["firecrawl", "requests"],
-          "estimated_loc": 180,
-          "reusability_score": 75
-        },
-        {
-          "source_path": "advance_ai_agents/*/memory patterns",
-          "target_path": "backend/services/memory_service.py",
-          "action": "INSPIRATION",
-          "complexity": "medium",
-          "description": "Memory persistence patterns using Memori SDK concepts",
-          "dependencies": ["redis"],
-          "estimated_loc": 0,
-          "reusability_score": 0,
-          "note": "Inspired by Memori SDK integration patterns"
-        },
-        {
-          "source_path": "simple_ai_agents/calendar_assistant/",
-          "target_path": "backend/tools/calendar_integration.py",
-          "action": "REFACTOR",
-          "complexity": "medium",
-          "description": "Calendar scheduling (Cal.com integration)",
-          "dependencies": ["requests", "pydantic"],
-          "estimated_loc": 220,
-          "reusability_score": 70
-        },
-        {
-          "source_path": "UI patterns from various agents",
-          "target_path": "frontend/components/chat.tsx",
-          "action": "REWRITE",
-          "complexity": "high",
-          "description": "React chat interface based on Streamlit patterns",
-          "dependencies": ["react", "typescript", "tailwindcss"],
-          "estimated_loc": 420,
-          "reusability_score": 40
-        },
-        {
-          "source_path": "course/aws_strands/",
-          "target_path": "docs/reference/agent_best_practices.md",
-          "action": "REFERENCE_ONLY",
-          "complexity": "low",
-          "description": "Agent development best practices and patterns",
-          "dependencies": [],
-          "estimated_loc": 0,
-          "reusability_score": 0,
-          "note": "Use as documentation reference"
-        }
-      ],
-      "integration_points": {
-        "memory": "Memori SDK patterns",
-        "web_search": "Firecrawl, Exa, Tavily",
-        "calendar": "Cal.com API",
-        "email": "Gmail API",
-        "mcp": "Model Context Protocol"
-      },
-      "deployment_method": "Various (Streamlit, FastAPI, CLI)"
-    }
-  ],
+  "repositories_analyzed": [],
   "architecture": {
     "style": "Microservices with API Gateway",
     "cloud_agnostic": true,
@@ -431,24 +81,47 @@
             {
               "name": "BaseAgent",
               "type": "abstract",
-              "methods": ["process", "initialize_tools", "remember", "recall"]
+              "methods": [
+                "process",
+                "initialize_tools",
+                "remember",
+                "recall"
+              ]
             },
             {
               "name": "SalesAgent",
               "inherits": "BaseAgent",
-              "tools": ["product_catalog", "crm_integration", "payment_link"],
+              "tools": [
+                "product_catalog",
+                "crm_integration",
+                "payment_link"
+              ],
               "conversation_stages": 7
             },
             {
               "name": "MarketingCrew",
               "inherits": "BaseAgent",
-              "agents": ["market_researcher", "content_creator", "post_scheduler"],
-              "platforms": ["instagram", "twitter", "linkedin", "email"]
+              "agents": [
+                "market_researcher",
+                "content_creator",
+                "post_scheduler"
+              ],
+              "platforms": [
+                "instagram",
+                "twitter",
+                "linkedin",
+                "email"
+              ]
             },
             {
               "name": "UnifiedOrchestrator",
               "description": "Decision engine that routes to appropriate agent",
-              "methods": ["process_message", "detect_intent", "analyze_sentiment", "decide_action"]
+              "methods": [
+                "process_message",
+                "detect_intent",
+                "analyze_sentiment",
+                "decide_action"
+              ]
             }
           ]
         },
@@ -460,7 +133,12 @@
             {
               "name": "LLMService",
               "file": "llm_service.py",
-              "providers": ["openai", "anthropic", "vertexai", "azure"],
+              "providers": [
+                "openai",
+                "anthropic",
+                "vertexai",
+                "azure"
+              ],
               "default_provider": "openai",
               "default_model": "gpt-4o",
               "supports_streaming": true
@@ -468,28 +146,62 @@
             {
               "name": "EmbeddingService",
               "file": "embedding_service.py",
-              "providers": ["openai", "huggingface", "vertexai"],
+              "providers": [
+                "openai",
+                "huggingface",
+                "vertexai"
+              ],
               "default_model": "text-embedding-3-small",
               "batch_support": true
             },
             {
               "name": "IntentDetector",
               "file": "intent_detector.py",
-              "methods": ["detect", "_pattern_match", "_llm_classify"],
+              "methods": [
+                "detect",
+                "_pattern_match",
+                "_llm_classify"
+              ],
               "cache_enabled": true,
-              "intents": ["purchase", "support", "complaint", "inquiry", "upsell_opportunity", "churn_risk"]
+              "intents": [
+                "purchase",
+                "support",
+                "complaint",
+                "inquiry",
+                "upsell_opportunity",
+                "churn_risk"
+              ]
             },
             {
               "name": "SentimentAnalyzer",
               "file": "sentiment_analyzer.py",
-              "methods": ["analyze", "_lexicon_score", "_detect_emotions", "_calculate_urgency"],
-              "sentiments": ["positive", "neutral", "negative"],
-              "emotions": ["joy", "anger", "fear", "sadness", "urgency"]
+              "methods": [
+                "analyze",
+                "_lexicon_score",
+                "_detect_emotions",
+                "_calculate_urgency"
+              ],
+              "sentiments": [
+                "positive",
+                "neutral",
+                "negative"
+              ],
+              "emotions": [
+                "joy",
+                "anger",
+                "fear",
+                "sadness",
+                "urgency"
+              ]
             },
             {
               "name": "RAGService",
               "file": "rag_service.py",
-              "components": ["retrieval", "reranking", "context_assembly"],
+              "components": [
+                "retrieval",
+                "reranking",
+                "context_assembly"
+              ],
               "vector_db": "qdrant",
               "reranking_model": "cross-encoder"
             },
@@ -497,7 +209,11 @@
               "name": "MemoryService",
               "file": "memory_service.py",
               "backend": "redis",
-              "stores": ["conversation_history", "user_context", "agent_memory"],
+              "stores": [
+                "conversation_history",
+                "user_context",
+                "agent_memory"
+              ],
               "ttl_default": "7 days"
             }
           ]
@@ -510,29 +226,46 @@
             {
               "name": "knowledge_base.py",
               "description": "Product/service knowledge retrieval",
-              "integrations": ["vector_db", "rag_service"]
+              "integrations": [
+                "vector_db",
+                "rag_service"
+              ]
             },
             {
               "name": "web_search.py",
               "description": "Web search integration",
-              "providers": ["exa", "firecrawl", "tavily"],
+              "providers": [
+                "exa",
+                "firecrawl",
+                "tavily"
+              ],
               "default": "exa"
             },
             {
               "name": "crm.py",
               "description": "CRM integration",
-              "providers": ["stripe", "salesforce"],
+              "providers": [
+                "stripe",
+                "salesforce"
+              ],
               "default": "stripe"
             },
             {
               "name": "social_media.py",
               "description": "Social media API integrations",
-              "platforms": ["instagram", "twitter", "linkedin"]
+              "platforms": [
+                "instagram",
+                "twitter",
+                "linkedin"
+              ]
             },
             {
               "name": "calendar_integration.py",
               "description": "Calendar scheduling",
-              "providers": ["cal.com", "google_calendar"]
+              "providers": [
+                "cal.com",
+                "google_calendar"
+              ]
             }
           ]
         },
@@ -562,14 +295,22 @@
         {
           "type": "redis",
           "purpose": "Session store, conversation memory, caching",
-          "collections": ["conversations:{session_id}", "user_context:{user_id}", "cache:{key}"],
+          "collections": [
+            "conversations:{session_id}",
+            "user_context:{user_id}",
+            "cache:{key}"
+          ],
           "host": "${REDIS_URL}",
           "ttl_strategy": "Configurable per collection"
         },
         {
           "type": "qdrant",
           "purpose": "Vector store for RAG",
-          "collections": ["knowledge_base", "product_catalog", "customer_documents"],
+          "collections": [
+            "knowledge_base",
+            "product_catalog",
+            "customer_documents"
+          ],
           "host": "${QDRANT_URL}",
           "embedding_dim": 1536
         },
@@ -577,7 +318,11 @@
           "type": "postgresql",
           "purpose": "User profiles, analytics, audit logs",
           "optional": true,
-          "tables": ["users", "conversations_metadata", "analytics_events"]
+          "tables": [
+            "users",
+            "conversations_metadata",
+            "analytics_events"
+          ]
         }
       ]
     },
@@ -605,12 +350,22 @@
                 "Markdown rendering",
                 "Code syntax highlighting"
               ],
-              "state": ["messages", "isLoading", "sessionId", "currentIntent"]
+              "state": [
+                "messages",
+                "isLoading",
+                "sessionId",
+                "currentIntent"
+              ]
             },
             {
               "name": "AnalyticsPanel",
               "file": "components/chat/AnalyticsPanel.tsx",
-              "metrics": ["sentiment_score", "intent_confidence", "response_time", "tokens_used"]
+              "metrics": [
+                "sentiment_score",
+                "intent_confidence",
+                "response_time",
+                "tokens_used"
+              ]
             }
           ]
         },
@@ -631,12 +386,21 @@
             },
             {
               "name": "ConversationList",
-              "features": ["filtering", "search", "export", "pagination"]
+              "features": [
+                "filtering",
+                "search",
+                "export",
+                "pagination"
+              ]
             },
             {
               "name": "AnalyticsCharts",
               "library": "recharts",
-              "charts": ["LineChart", "BarChart", "PieChart"]
+              "charts": [
+                "LineChart",
+                "BarChart",
+                "PieChart"
+              ]
             }
           ]
         },
@@ -673,7 +437,11 @@
             "sessionId": "string",
             "error": "string | null"
           },
-          "actions": ["sendMessage", "clearMessages", "setSessionId"]
+          "actions": [
+            "sendMessage",
+            "clearMessages",
+            "setSessionId"
+          ]
         },
         {
           "name": "userStore",
@@ -767,17 +535,31 @@
       "type": "llm_provider",
       "required": true,
       "api_base": "https://api.openai.com/v1",
-      "models": ["gpt-4o", "gpt-4o-mini", "text-embedding-3-small"],
-      "env_vars": ["OPENAI_API_KEY"],
-      "endpoints_used": ["/chat/completions", "/embeddings"]
+      "models": [
+        "gpt-4o",
+        "gpt-4o-mini",
+        "text-embedding-3-small"
+      ],
+      "env_vars": [
+        "OPENAI_API_KEY"
+      ],
+      "endpoints_used": [
+        "/chat/completions",
+        "/embeddings"
+      ]
     },
     {
       "name": "anthropic",
       "type": "llm_provider",
       "required": false,
       "api_base": "https://api.anthropic.com/v1",
-      "models": ["claude-sonnet-4-20250514", "claude-opus-4-20250514"],
-      "env_vars": ["ANTHROPIC_API_KEY"],
+      "models": [
+        "claude-sonnet-4-20250514",
+        "claude-opus-4-20250514"
+      ],
+      "env_vars": [
+        "ANTHROPIC_API_KEY"
+      ],
       "use_case": "Alternative LLM provider for cost optimization"
     },
     {
@@ -785,8 +567,15 @@
       "type": "payment",
       "required": false,
       "api_base": "https://api.stripe.com/v1",
-      "env_vars": ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET"],
-      "endpoints_used": ["/payment_intents", "/customers", "/subscriptions"],
+      "env_vars": [
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET"
+      ],
+      "endpoints_used": [
+        "/payment_intents",
+        "/customers",
+        "/subscriptions"
+      ],
       "use_case": "Payment processing and CRM integration"
     },
     {
@@ -794,7 +583,9 @@
       "type": "web_search",
       "required": false,
       "api_base": "https://api.exa.ai",
-      "env_vars": ["EXA_API_KEY"],
+      "env_vars": [
+        "EXA_API_KEY"
+      ],
       "use_case": "Semantic web search for research and content discovery"
     },
     {
@@ -802,7 +593,9 @@
       "type": "web_scraping",
       "required": false,
       "api_base": "https://api.firecrawl.dev",
-      "env_vars": ["FIRECRAWL_API_KEY"],
+      "env_vars": [
+        "FIRECRAWL_API_KEY"
+      ],
       "use_case": "Web page content extraction"
     },
     {
@@ -810,7 +603,9 @@
       "type": "social_media",
       "required": false,
       "api_base": "https://graph.instagram.com",
-      "env_vars": ["INSTAGRAM_ACCESS_TOKEN"],
+      "env_vars": [
+        "INSTAGRAM_ACCESS_TOKEN"
+      ],
       "use_case": "Post scheduling and analytics"
     },
     {
@@ -818,7 +613,9 @@
       "type": "calendar",
       "required": false,
       "api_base": "https://api.cal.com/v1",
-      "env_vars": ["CAL_API_KEY"],
+      "env_vars": [
+        "CAL_API_KEY"
+      ],
       "use_case": "Meeting scheduling integration"
     }
   ],
@@ -920,55 +717,86 @@
           "name": "api",
           "image": "python:3.11-slim",
           "build": "./backend",
-          "ports": ["8000:8000"],
+          "ports": [
+            "8000:8000"
+          ],
           "environment": [
             "REDIS_URL=redis://redis:6379",
             "QDRANT_URL=http://qdrant:6333"
           ],
-          "depends_on": ["redis", "qdrant"],
+          "depends_on": [
+            "redis",
+            "qdrant"
+          ],
           "healthcheck": {
             "test": "curl -f http://localhost:8000/health || exit 1",
             "interval": "30s",
             "timeout": "10s",
             "retries": 3
           },
-          "volumes": ["./backend:/app"]
+          "volumes": [
+            "./backend:/app"
+          ]
         },
         {
           "name": "frontend",
           "image": "node:20-alpine",
           "build": "./frontend",
-          "ports": ["3000:3000"],
-          "environment": ["NEXT_PUBLIC_API_URL=http://localhost:8000"],
-          "depends_on": ["api"]
+          "ports": [
+            "3000:3000"
+          ],
+          "environment": [
+            "NEXT_PUBLIC_API_URL=http://localhost:8000"
+          ],
+          "depends_on": [
+            "api"
+          ]
         },
         {
           "name": "redis",
           "image": "redis:7-alpine",
-          "ports": ["6379:6379"],
-          "volumes": ["redis_data:/data"],
+          "ports": [
+            "6379:6379"
+          ],
+          "volumes": [
+            "redis_data:/data"
+          ],
           "command": "redis-server --appendonly yes"
         },
         {
           "name": "qdrant",
           "image": "qdrant/qdrant:latest",
-          "ports": ["6333:6333"],
-          "volumes": ["qdrant_data:/qdrant/storage"]
+          "ports": [
+            "6333:6333"
+          ],
+          "volumes": [
+            "qdrant_data:/qdrant/storage"
+          ]
         },
         {
           "name": "postgres",
           "image": "postgres:16-alpine",
-          "ports": ["5432:5432"],
+          "ports": [
+            "5432:5432"
+          ],
           "environment": [
             "POSTGRES_DB=genai_platform",
             "POSTGRES_USER=postgres",
             "POSTGRES_PASSWORD=postgres"
           ],
-          "volumes": ["postgres_data:/var/lib/postgresql/data"]
+          "volumes": [
+            "postgres_data:/var/lib/postgresql/data"
+          ]
         }
       ],
-      "volumes": ["redis_data", "qdrant_data", "postgres_data"],
-      "networks": ["genai_network"]
+      "volumes": [
+        "redis_data",
+        "qdrant_data",
+        "postgres_data"
+      ],
+      "networks": [
+        "genai_network"
+      ]
     },
     "kubernetes": {
       "enabled": false,
@@ -1096,7 +924,11 @@
           "Urgency level calculation (0-10)",
           "LLM analysis for edge cases"
         ],
-        "sentiments": ["positive", "neutral", "negative"],
+        "sentiments": [
+          "positive",
+          "neutral",
+          "negative"
+        ],
         "performance": "< 100ms average"
       },
       {
@@ -1161,14 +993,14 @@
           "route(decision, message, context) -> AgentResponse"
         ],
         "routing_logic": {
-          "sell -> SalesAgent",
-          "upsell -> SalesAgent",
-          "qualify -> SalesAgent",
-          "support -> SupportAgent",
-          "escalate -> SupportAgent",
-          "retain -> RetentionAgent",
-          "market -> MarketingAgent",
-          "nurture -> MarketingAgent"
+          "sell": "SalesAgent",
+          "upsell": "SalesAgent",
+          "qualify": "SalesAgent",
+          "support": "SupportAgent",
+          "escalate": "SupportAgent",
+          "retain": "RetentionAgent",
+          "market": "MarketingAgent",
+          "nurture": "MarketingAgent"
         },
         "timeout": "3000ms per agent execution"
       },
@@ -1241,63 +1073,7 @@
       "Async/await throughout pipeline"
     ]
   },
-  "code_extraction_summary": {
-    "total_files_analyzed": 89,
-    "total_loc_extracted": 4850,
-    "reuse_percentage": 68,
-    "refactor_percentage": 22,
-    "rewrite_percentage": 10,
-    "by_repository": {
-      "SalesGPT": {
-        "files": 12,
-        "loc": 1985,
-        "reuse": 85,
-        "key_extractions": [
-          "Sales agent core logic",
-          "Conversation stages",
-          "FastAPI structure",
-          "Tool integrations"
-        ]
-      },
-      "Smart-Marketing-Assistant-Crew-AI": {
-        "files": 8,
-        "loc": 885,
-        "reuse": 75,
-        "key_extractions": [
-          "CrewAI orchestration",
-          "Agent configurations",
-          "Task definitions"
-        ]
-      },
-      "GenAI_Agents": {
-        "files": 0,
-        "loc": 0,
-        "reuse": 0,
-        "note": "Used as architectural reference only, no direct code extraction"
-      },
-      "GenAIExamples": {
-        "files": 18,
-        "loc": 1660,
-        "reuse": 70,
-        "key_extractions": [
-          "RAG service",
-          "Embedding service",
-          "Vector store abstraction",
-          "Microservice patterns"
-        ]
-      },
-      "awesome-ai-apps": {
-        "files": 6,
-        "loc": 320,
-        "reuse": 60,
-        "key_extractions": [
-          "Web search tools",
-          "Calendar integration",
-          "Memory patterns"
-        ]
-      }
-    }
-  },
+  "code_extraction_summary": {},
   "checkpoints": [
     {
       "id": "checkpoint_1",
@@ -1396,7 +1172,7 @@
       "5. Set up CI/CD pipeline"
     ],
     "phase_1_foundation": [
-      "1. Extract and refactor SalesGPT agent code",
+      "1. Implement Sales Agent logic",
       "2. Set up FastAPI backend structure",
       "3. Configure Redis and Qdrant",
       "4. Implement UnifiedOrchestrator core",
@@ -1405,14 +1181,14 @@
     ],
     "phase_2_agents": [
       "1. Integrate SalesAgent with tools",
-      "2. Extract and configure MarketingCrew",
+      "2. Configure Marketing Multi-Agent System",
       "3. Implement SupportAgent",
       "4. Build RetentionAgent",
-      "5. Set up RAG service with OPEA components",
+      "5. Set up RAG service",
       "6. Implement MemoryService with Redis"
     ],
     "phase_3_ui": [
-      "1. Generate UI with AntiGravity (Checkpoint 2)",
+      "1. Generate UI components (Checkpoint 2)",
       "2. Build ChatInterface component",
       "3. Create Dashboard with analytics",
       "4. Implement real-time streaming",
