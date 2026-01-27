@@ -1,0 +1,23 @@
+market_research:
+  description: >
+    Investigate the latest trends, hashtags, and competitor activities for: {instagram_description}.
+    Focus of the week: {topic_of_the_week}.
+    Identify 3-5 key trends and 10 relevant hashtags.
+  expected_output: >
+    A bulleted list of trends and hashtags.
+
+content_strategy:
+  description: >
+    Create a 3-day content calendar based on the research.
+    Day 1: Educational post.
+    Day 2: Engagement post.
+    Day 3: Promotional post.
+  expected_output: >
+    A markdown table with Day, Theme, and Post Idea.
+
+copywriting:
+  description: >
+    Write captions for the 3 posts defined in the content strategy.
+    Include emojis and selected hashtags.
+  expected_output: >
+    Markdown text with captions for Day 1, Day 2, and Day 3.
