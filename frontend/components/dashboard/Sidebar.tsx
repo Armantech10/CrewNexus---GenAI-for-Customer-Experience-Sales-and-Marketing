@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, MessageSquare, PieChart, Users, Settings, LifeBuoy } from "lucide-react";
+import { LayoutDashboard, MessageSquare, PieChart, Users, Settings, LifeBuoy, Code } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -11,6 +11,7 @@ const navItems = [
     { icon: PieChart, label: "Sales & Leads", href: "/dashboard/sales" },
     { icon: Users, label: "Marketing Campaigns", href: "/dashboard/marketing" },
     { icon: LifeBuoy, label: "Support Tickets", href: "/dashboard/support" },
+    { icon: Code, label: "Engineer Agent", href: "/dashboard/engineer" },
     { icon: Settings, label: "Settings", href: "/dashboard/settings" },
 ];
 

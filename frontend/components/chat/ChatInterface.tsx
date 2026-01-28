@@ -9,18 +9,24 @@ import { nanoid } from "nanoid";
 interface ChatInterfaceProps {
     initialMessage?: string;
     agentName?: string;
+    welcomeMessage?: string;
+    endpoint?: string;
+    onResponse?: (response: any) => void;
 }
 
 export function ChatInterface({
-    initialMessage = "Hello! I am CrewNexus, your GenAI assistant. How can I help you today?",
-    agentName = "Unified Agent"
+    initialMessage,
+    welcomeMessage,
+    agentName = "Unified Agent",
+    endpoint = "/api/v1/chat",
+    onResponse
 }: ChatInterfaceProps) {
     const [mounted, setMounted] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         {
             id: "welcome-1",
             role: "assistant",
-            content: initialMessage,
+            content: welcomeMessage || initialMessage || "Hello! How can I help you?",
             timestamp: new Date(),
             agentName: agentName
         }
@@ -45,13 +51,16 @@ export function ChatInterface({
         setIsLoading(true);
 
         try {
-            // 2. Call API
-            const response = await fetch("http://localhost:8000/api/v1/chat", {
+            // 2. Call API (Dynamic Endpoint)
+            // Handle both relative (starts with /) and absolute URLs logic simply
+            const apiUrl = endpoint.startsWith("http") ? endpoint : `http://localhost:8000/api/v1${endpoint.replace("/api/v1", "")}`;
+
+            const response = await fetch(apiUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     message: content,
-                    session_id: "demo-session", // TODO: Generate real session ID
+                    session_id: "demo-session",
                     user_id: "demo-user"
                 })
             });
@@ -60,12 +69,15 @@ export function ChatInterface({
 
             const data = await response.json();
 
+            // Callback for external handling (e.g. updating terminal)
+            if (onResponse) onResponse(data);
+
             const aiMsg: Message = {
                 id: nanoid(),
                 role: "assistant",
                 content: data.response,
                 timestamp: new Date(),
-                agentName: data.agent_used, // Use the agent returned by backend
+                agentName: data.agent_used || agentName,
                 intent: data.intent,
                 sentiment: data.sentiment
             };
@@ -90,7 +102,6 @@ export function ChatInterface({
                     <div className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]" />
                     <span className="font-semibold text-sm tracking-wide">CrewNexus</span>
                 </div>
-                {/* <Button variant="ghost" size="icon"><Settings size={18}/></Button> */}
             </header>
 
             {/* Messages */}

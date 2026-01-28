@@ -30,7 +30,7 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 app.add_middleware(RateLimitMiddleware)
 
 
-from backend.api.routers import chat, health, analytics, marketing, payments, search, social, calendar
+from backend.api.routers import chat, health, analytics, marketing, payments, search, social, calendar, engineer
 
 app.include_router(chat.router, prefix="/api/v1", tags=["chat"])
 app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["analytics"])
@@ -39,6 +39,7 @@ app.include_router(payments.router, prefix="/api/v1/payments", tags=["payments"]
 app.include_router(search.router, prefix="/api/v1/search", tags=["search"])
 app.include_router(social.router, prefix="/api/v1/social", tags=["social"])
 app.include_router(calendar.router, prefix="/api/v1/calendar", tags=["calendar"])
+app.include_router(engineer.router, prefix="/api/v1/engineer", tags=["engineer"])
 app.include_router(health.router, tags=["health"])
 
 @app.get("/")
