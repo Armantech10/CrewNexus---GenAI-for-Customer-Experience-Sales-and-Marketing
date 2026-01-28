@@ -12,7 +12,10 @@ app = FastAPI(
 )
 
 # CORS Configuration
-origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
+# CORS Configuration
+from backend.config.settings import settings
+
+origins = settings.ALLOWED_ORIGINS
 
 from fastapi.middleware.gzip import GZipMiddleware
 from backend.api.middleware import RateLimitMiddleware

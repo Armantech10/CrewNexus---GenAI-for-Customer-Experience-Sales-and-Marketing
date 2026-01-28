@@ -22,10 +22,16 @@ try:
 except ImportError:
     anthropic = None
 
+try:
+    import google.generativeai as genai
+except ImportError:
+    genai = None
+
 
 class LLMProvider(str, Enum):
     OPENAI = "openai"
     ANTHROPIC = "anthropic"
+    GEMINI = "gemini"
     MOCK = "mock"
 
 
@@ -53,11 +59,19 @@ class LLMService:
             self.anthropic_client = anthropic.AsyncAnthropic(
                 api_key=settings.ANTHROPIC_API_KEY
             )
+            
+        if settings.GEMINI_API_KEY and genai:
+            genai.configure(api_key=settings.GEMINI_API_KEY)
+            self.gemini_available = True
+        else:
+            self.gemini_available = False
     
     @property
     def available_provider(self) -> LLMProvider:
         """Get the best available provider."""
-        if self.openai_client:
+        if self.gemini_available:
+            return LLMProvider.GEMINI
+        elif self.openai_client:
             return LLMProvider.OPENAI
         elif self.anthropic_client:
             return LLMProvider.ANTHROPIC
@@ -95,6 +109,10 @@ class LLMService:
         elif provider == LLMProvider.ANTHROPIC:
             return await self._generate_anthropic(
                 prompt, system_prompt, model or "claude-sonnet-4-20250514", max_tokens, temperature
+            )
+        elif provider == LLMProvider.GEMINI:
+            return await self._generate_gemini(
+                prompt, system_prompt, model or "gemini-1.5-flash", max_tokens, temperature
             )
         else:
             return await self._generate_mock(prompt, system_prompt)
@@ -147,6 +165,37 @@ class LLMService:
             content=message.content[0].text,
             tokens_used=message.usage.input_tokens + message.usage.output_tokens,
             provider="anthropic",
+            model=model
+        )
+
+    async def _generate_gemini(
+        self,
+        prompt: str,
+        system_prompt: Optional[str],
+        model: str,
+        max_tokens: int,
+        temperature: float
+    ) -> LLMResponse:
+        """Generate using Google Gemini."""
+        # Configure model
+        gemini_model = genai.GenerativeModel(
+            model_name=model,
+            system_instruction=system_prompt
+        )
+        
+        # Async generation
+        response = await gemini_model.generate_content_async(
+            prompt,
+            generation_config=genai.types.GenerationConfig(
+                max_output_tokens=max_tokens,
+                temperature=temperature
+            )
+        )
+        
+        return LLMResponse(
+            content=response.text,
+            tokens_used=0, # Usage metadata varies, defaulting to 0 for now
+            provider="gemini",
             model=model
         )
     
