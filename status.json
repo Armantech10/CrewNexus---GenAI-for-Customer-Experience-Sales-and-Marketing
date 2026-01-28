@@ -1,24 +1,24 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-01-27T12:49:58.224704",
-  "validation_run_id": "val_5908521d",
+  "generated_at": "2026-01-29T00:09:23.395806",
+  "validation_run_id": "val_d7c8143a",
   "overall_status": "FAILED",
   "scores": {
-    "specs": 33,
-    "other": 100,
+    "specs": 100,
+    "code_quality": 0,
     "test_coverage": 0,
-    "integration": 0,
+    "integration": 66,
     "performance": 0,
     "security": 25,
     "accessibility": 0,
     "deployment": 0,
-    "overall": 19
+    "overall": 23
   },
   "validators": [
     {
       "name": "spec_validator",
-      "status": "FAILED",
-      "duration_ms": 2,
+      "status": "PASSED",
+      "duration_ms": 0,
       "checks": [
         {
           "name": "Check specs.json exists",
@@ -27,31 +27,53 @@
         },
         {
           "name": "Check components.json exists",
-          "status": "FAILED",
-          "message": "components.json not found."
+          "status": "PASSED",
+          "message": "components.json found."
         },
         {
           "name": "Validate specs.json JSON syntax",
-          "status": "FAILED",
-          "message": "Invalid JSON: Expecting ':' delimiter: line 1164 column 31 (char 40305)"
+          "status": "PASSED",
+          "message": "Valid JSON."
+        },
+        {
+          "name": "Validate components.json JSON syntax",
+          "status": "PASSED",
+          "message": "Valid JSON."
         }
-      ],
-      "errors": [
-        "components.json not found.",
-        "Invalid JSON: Expecting ':' delimiter: line 1164 column 31 (char 40305)"
       ]
     },
     {
-      "name": "CodeQualityValidator",
-      "status": "SKIPPED",
-      "duration_ms": 300000,
-      "checks": [],
-      "message": "Timed out"
+      "name": "code_quality_validator",
+      "status": "PASSED_WITH_WARNINGS",
+      "duration_ms": 1747,
+      "checks": [
+        {
+          "name": "Unknown Check",
+          "status": "FAILED",
+          "message": "'stdout'"
+        },
+        {
+          "name": "Unknown Check",
+          "status": "FAILED",
+          "message": "'returncode'"
+        },
+        {
+          "name": "Unknown Check",
+          "status": "FAILED",
+          "message": "'returncode'"
+        },
+        {
+          "name": "ESLint",
+          "status": "FAILED",
+          "message": "Lint errors found",
+          "details": "..."
+        }
+      ]
     },
     {
       "name": "test_coverage_validator",
       "status": "FAILED",
-      "duration_ms": 1207,
+      "duration_ms": 594,
       "checks": [
         {
           "name": "Unknown",
@@ -67,39 +89,40 @@
     },
     {
       "name": "integration_test_validator",
-      "status": "FAILED",
-      "duration_ms": 12201,
+      "status": "PASSED",
+      "duration_ms": 1353,
       "checks": [
         {
           "name": "GET /health",
-          "status": "FAILED",
-          "message": "Connection error: "
+          "status": "PASSED",
+          "message": "Status 200"
         },
         {
           "name": "GET /docs",
-          "status": "FAILED",
-          "message": "Connection error: "
+          "status": "PASSED",
+          "message": "Status 200"
         },
         {
           "name": "Integration Suite",
           "status": "SKIPPED",
           "message": "No integration tests found"
         }
-      ],
-      "errors": [
-        "Connection error: ",
-        "Connection error: "
       ]
     },
     {
       "name": "performance_validator",
-      "status": "PASSED_WITH_WARNINGS",
-      "duration_ms": 6253,
+      "status": "FAILED",
+      "duration_ms": 799,
       "checks": [
         {
-          "name": "API Latency",
+          "name": "API Response Time",
           "status": "FAILED",
-          "message": "All requests failed"
+          "metrics": {
+            "p50_ms": 584.01,
+            "p95_ms": 585.96,
+            "samples": 20
+          },
+          "message": "P50: 584ms, P95: 586ms"
         },
         {
           "name": "Lighthouse Performance",
@@ -111,7 +134,7 @@
     {
       "name": "security_validator",
       "status": "PASSED_WITH_WARNINGS",
-      "duration_ms": 2230,
+      "duration_ms": 1306,
       "checks": [
         {
           "name": "Bandit",
@@ -138,7 +161,7 @@
     {
       "name": "accessibility_validator",
       "status": "PASSED",
-      "duration_ms": 158,
+      "duration_ms": 128,
       "checks": [
         {
           "name": "A11y http://localhost:3000/chat",
@@ -160,7 +183,7 @@
     {
       "name": "deployment_validator",
       "status": "FAILED",
-      "duration_ms": 8,
+      "duration_ms": 4,
       "checks": [
         {
           "name": "Docker CLI",
@@ -171,21 +194,31 @@
     }
   ],
   "summary": {
-    "total_checks": 18,
-    "passed": 2,
+    "total_checks": 23,
+    "passed": 7,
     "warnings": 1,
     "failed": 8
   },
   "recommendations": [
     {
       "priority": "high",
-      "category": "spec_validator",
-      "message": "Check components.json exists: components.json not found."
+      "category": "code_quality_validator",
+      "message": "Unknown Check: 'stdout'"
     },
     {
       "priority": "high",
-      "category": "spec_validator",
-      "message": "Validate specs.json JSON syntax: Invalid JSON: Expecting ':' delimiter: line 1164 column 31 (char 40305)"
+      "category": "code_quality_validator",
+      "message": "Unknown Check: 'returncode'"
+    },
+    {
+      "priority": "high",
+      "category": "code_quality_validator",
+      "message": "Unknown Check: 'returncode'"
+    },
+    {
+      "priority": "high",
+      "category": "code_quality_validator",
+      "message": "ESLint: Lint errors found"
     },
     {
       "priority": "high",
@@ -199,23 +232,8 @@
     },
     {
       "priority": "high",
-      "category": "integration_test_validator",
-      "message": "GET /health: Connection error: "
-    },
-    {
-      "priority": "high",
-      "category": "integration_test_validator",
-      "message": "GET /docs: Connection error: "
-    },
-    {
-      "priority": "medium",
-      "category": "integration_test_validator",
-      "message": "Integration Suite: No integration tests found"
-    },
-    {
-      "priority": "high",
       "category": "performance_validator",
-      "message": "API Latency: All requests failed"
+      "message": "API Response Time: P50: 584ms, P95: 586ms"
     },
     {
       "priority": "medium",

@@ -199,8 +199,8 @@ class TestKnowledgeBase:
         
         pricing = await knowledge_base.get_pricing_info()
         
-        assert "products" in pricing
-        assert len(pricing["products"]) > 0
+        assert "plans" in pricing
+        assert len(pricing["plans"]) > 0
 
 
 class TestCRM:
@@ -210,11 +210,11 @@ class TestCRM:
     async def test_lookup_customer(self):
         from backend.tools.crm import crm_tool
         
-        # Look up by email
-        customer = await crm_tool.lookup_customer(email="john@acme.com")
+        # Look up by email (using existing mock data)
+        customer = await crm_tool.lookup_customer(email="alice@example.com")
         
         assert customer is not None
-        assert customer["email"] == "john@acme.com"
+        assert customer.email == "alice@example.com"
     
     @pytest.mark.asyncio
     async def test_create_lead(self):
@@ -226,6 +226,6 @@ class TestCRM:
             source="website"
         )
         
-        assert lead["id"].startswith("lead_")
-        assert lead["email"] == "newlead@test.com"
-        assert lead["status"] == "new"
+        assert lead.id.startswith("lead_")
+        assert lead.email == "newlead@test.com"
+        assert lead.status == "new"
