@@ -112,7 +112,7 @@ class LLMService:
             )
         elif provider == LLMProvider.GEMINI:
             return await self._generate_gemini(
-                prompt, system_prompt, model or "gemini-1.5-flash", max_tokens, temperature
+                prompt, system_prompt, model or "gemini-2.0-flash", max_tokens, temperature
             )
         else:
             return await self._generate_mock(prompt, system_prompt)
@@ -174,30 +174,51 @@ class LLMService:
         system_prompt: Optional[str],
         model: str,
         max_tokens: int,
-        temperature: float
+        temperature: float,
+        max_retries: int = 3
     ) -> LLMResponse:
-        """Generate using Google Gemini."""
+        """Generate using Google Gemini with automatic retry for rate limits."""
+        import asyncio
+        
         # Configure model
         gemini_model = genai.GenerativeModel(
             model_name=model,
             system_instruction=system_prompt
         )
         
-        # Async generation
-        response = await gemini_model.generate_content_async(
-            prompt,
-            generation_config=genai.types.GenerationConfig(
-                max_output_tokens=max_tokens,
-                temperature=temperature
-            )
-        )
+        last_error = None
+        for attempt in range(max_retries):
+            try:
+                # Async generation
+                response = await gemini_model.generate_content_async(
+                    prompt,
+                    generation_config=genai.types.GenerationConfig(
+                        max_output_tokens=max_tokens,
+                        temperature=temperature
+                    )
+                )
+                
+                return LLMResponse(
+                    content=response.text,
+                    tokens_used=0,
+                    provider="gemini",
+                    model=model
+                )
+            except Exception as e:
+                last_error = e
+                error_str = str(e).lower()
+                
+                # Check if it's a rate limit error (429)
+                if "429" in str(e) or "quota" in error_str or "rate" in error_str:
+                    wait_time = (attempt + 1) * 10  # 10s, 20s, 30s
+                    print(f"Rate limit hit. Waiting {wait_time}s before retry {attempt + 1}/{max_retries}...")
+                    await asyncio.sleep(wait_time)
+                else:
+                    # For non-rate-limit errors, don't retry
+                    raise e
         
-        return LLMResponse(
-            content=response.text,
-            tokens_used=0, # Usage metadata varies, defaulting to 0 for now
-            provider="gemini",
-            model=model
-        )
+        # All retries exhausted
+        raise last_error
     
     async def _generate_mock(
         self,

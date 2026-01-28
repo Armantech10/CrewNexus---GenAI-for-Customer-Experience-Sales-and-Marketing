@@ -12,7 +12,6 @@ app = FastAPI(
 )
 
 # CORS Configuration
-# CORS Configuration
 from backend.config.settings import settings
 
 origins = settings.ALLOWED_ORIGINS
