@@ -7,18 +7,28 @@ import uuid
 
 class RAGService:
     def __init__(self):
-        self.client = QdrantClient(url=settings.QDRANT_URL)
+        try:
+            self.client = QdrantClient(url=settings.QDRANT_URL)
+            # rapid check to see if we can actually connect
+            self.client.get_collections()
+        except Exception as e:
+            print(f"Warning: Could not connect to Qdrant at {settings.QDRANT_URL}. Falling back to in-memory mode. Error: {e}")
+            self.client = QdrantClient(location=":memory:")
+            
         self.collection_name = "knowledge_base"
         self.embedding_service = EmbeddingService()
         self._ensure_collection()
 
     def _ensure_collection(self):
-        collections = self.client.get_collections()
-        if self.collection_name not in [c.name for c in collections.collections]:
-            self.client.create_collection(
-                collection_name=self.collection_name,
-                vectors_config=models.VectorParams(size=384, distance=models.Distance.COSINE),
-            )
+        try:
+            collections = self.client.get_collections()
+            if self.collection_name not in [c.name for c in collections.collections]:
+                self.client.create_collection(
+                    collection_name=self.collection_name,
+                    vectors_config=models.VectorParams(size=384, distance=models.Distance.COSINE),
+                )
+        except Exception as e:
+            print(f"Error ensuring collection: {e}")
 
     async def ingest_document(self, content: str, metadata: Dict[str, Any]):
         vector = await self.embedding_service.embed_query(content)
